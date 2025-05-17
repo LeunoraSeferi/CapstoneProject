@@ -1,3 +1,4 @@
+//PJESA MAJTE
 "use client"
 import React from 'react'
 import Image from 'next/image'
@@ -38,7 +39,9 @@ function SideBar() {
 
 
         <div className="mt-10">
+          <Link href={'/create'} className="w-full">
         <Button className="w-full">+ Create New</Button>
+        </Link>
 
         <div className='mt-5'>
             {MenuList.map((menu,index)=>(
