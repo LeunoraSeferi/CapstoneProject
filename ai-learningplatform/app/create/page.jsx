@@ -9,6 +9,8 @@ import axios from 'axios';
 import { useUser } from '@clerk/nextjs';
 import { Loader } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { toast } from "sonner"
+
 
 
 
@@ -39,6 +41,8 @@ function Create() {
       });
       setLoading(false);
       router.replace('/dashboard');
+      //Toast Notification
+      toast("Your course content is generating,Click on Refresh Button")
       console.log(result.data.result.resp);
     }
   return (
