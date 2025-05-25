@@ -20,6 +20,7 @@ export async function POST(req){
     const dbResult=await db.insert(STUDY_MATERIAL_TABLE).values({
         courseId:courseId,
         courseType:courseType,
+        difficultyLevel: difficultyLevel,
         createdBy:createdBy,
         topic:topic,
         courseLayout:aiResult
