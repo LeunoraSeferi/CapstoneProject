@@ -29,12 +29,12 @@ const generationConfig = {
         parts: [
           {
             text: `Generate a study material for the book "Laravel: Up & Running – A Framework for Building Modern PHP Apps" as a "Coding Prep" course.  
-The difficulty level is "Moderate".  
-Please include:
-- A brief summary of the entire course/book.
-- A list of chapters with a short summary for each chapter.
-- A topic breakdown for each chapter (key concepts or subtopics).
-- Return the response in structured JSON format.`,
+                  The difficulty level is "Moderate".  
+                   Please include:
+              - A brief summary of the entire course/book.
+              - A list of chapters with a short summary for each chapter.
+              - A topic breakdown for each chapter (key concepts or subtopics).
+              - Return the response in structured JSON format.`,
           },
         ],
       },

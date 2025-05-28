@@ -55,10 +55,14 @@ import { courseOutlineAIModel, generateNotesAiModel } from "@/configs/AiModel";
                 const Chapters=course?.courseLayout?.chapters;
                 let index=0;
                 Chapters.forEach(async(chapter)=>{
-                    const PROMPT='Generate exam material detail content for each chapter,Make sure to includes all topic point in the content,make sure to give content in HTML format(do not add HTML,Head ,Body,title tag),The chapters:'
-                    +JSON.stringify(chapter);
-                    const result=await generateNotesAiModel.sendMessage(PROMPT);
-                    const aiResp=result.response.text();
+                  const PROMPT = `Generate a full HTML exam material for the chapter titled "${chapter.title}".
+                  Include all topics below as subheadings and paragraphs.
+                  Topics: ${chapter.topics.map((t) => t.topicName).join(", ")}
+                  Return clean HTML content without <html>, <head>, or <body> tags.`;
+                  
+                  const result = await generateNotesAiModel.sendMessage(PROMPT);
+                  const aiResp = (await result.response).text();  // sigurohu që e pret me `await`
+                  
 
                     await db.insert(CHAPTER_NOTES_TABLE).values({
                         chapterId:index,

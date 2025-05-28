@@ -1,6 +1,6 @@
 //pjesa e study type ato 4 qa,quiz...
 import { db } from '@/configs/db';
-import { CHAPTER_NOTES_TABLE } from '@/configs/schema'; // kjo është ajo që mungon
+import { CHAPTER_NOTES_TABLE } from '@/configs/schema'; 
 import { eq } from 'drizzle-orm';
 import {NextResponse} from 'next/server';
 
@@ -14,7 +14,7 @@ export async function POST(req){
         .where(eq(CHAPTER_NOTES_TABLE?.courseId,courseId));
 
 
-        //get the all other study type records
+        //Get the all other Study Type Records
         const result={
             notes:notes,
             flashcard:null,
@@ -22,5 +22,12 @@ export async function POST(req){
             qa:null
         }
         return NextResponse.json(result);
+    }
+    else if(studyType=='notes')
+    {
+        const notes=await db.select().from(CHAPTER_NOTES_TABLE)
+        .where(eq(CHAPTER_NOTES_TABLE?.courseId,courseId));
+
+        return NextResponse.json(notes);
     }
 }
