@@ -20,6 +20,14 @@ const generationConfig = {
   responseMimeType: "application/json",
 };
 
+const generationConfig2={
+  temperature: 1,
+  topP: 0.95,
+  topK: 40,
+  maxOutputTokens: 8192,
+  responseMimeType: "text/plain",
+}
+
 
   export const courseOutlineAIModel = model.startChat({
     generationConfig,
@@ -171,7 +179,28 @@ const generationConfig = {
     ],
   });
 
-
- // const result = await chatSession.sendMessage("INSERT_INPUT_HERE");
- // console.log(result.response.text());
-
+  
+  export const GenerateStudyTypeContentAiModel = model.startChat({
+    generationConfig, 
+    history: [
+      {
+        role: "user",
+        parts: [
+          {
+            text:
+              "Generate the flashcard on topic: Chapter 1: Introduction, Chapter 2: Automata and Languages, Chapter 3: Computability, Chapter 4: Turing Machines, Chapter 5: Computability, Chapter 6: Complexity Theory, Chapter 7: Additional Topics (if applicable depending on the course) in JSON format with front back content, Maximum 25",
+          },
+        ],
+      },
+      {
+        role: "model",
+        parts: [
+          {
+            text: "```json\n[\n  {\n    \"front\": \"Chapter 1: Introduction - What is the main goal of this chapter?\",\n    \"back\": \"To provide an overview of the course, defining key concepts like computation, algorithms, and the scope of theoretical computer science.\"\n  },\n  {\n    \"front\": \"Chapter 2: Automata and Languages - What are finite automata?\",\n    \"back\": \"Mathematical models of computation that can represent simple machines with finite memory. They accept or reject strings based on a set of rules.\"\n  },\n  {\n    \"front\": \"Chapter 2: Automata and Languages - What is a regular language?\",\n    \"back\": \"A language that can be accepted by a finite automaton.\"\n  },\n  {\n    \"front\": \"Chapter 3: Computability - What is the Church-Turing thesis?\",\n    \"back\": \"The assertion that any function which is intuitively computable can be computed by a Turing machine.\"\n  },\n  {\n    \"front\": \"Chapter 3: Computability - Define 'decidable' and 'undecidable' problems.\",\n    \"back\": \"Decidable: A problem for which an algorithm exists that can always provide a correct yes/no answer. Undecidable: A problem for which no such algorithm exists.\"\n  },\n  {\n    \"front\": \"Chapter 4: Turing Machines - Describe a Turing machine.\",\n    \"back\": \"A theoretical model of computation consisting of an infinitely long tape, a read/write head, and a finite state control. It can perform computations based on its current state and the symbol read from the tape.\"\n  },\n  {\n    \"front\": \"Chapter 4: Turing Machines - What is a Turing-acceptable language?\",\n    \"back\": \"A language for which there exists a Turing machine that halts and accepts all strings in the language and rejects or loops infinitely for strings not in the language.\"\n  },\n  {\n    \"front\": \"Chapter 5: Computability - What is the Halting Problem?\",\n    \"back\": \"The problem of determining, from a description of an arbitrary computer program and its input, whether the program will eventually halt or run forever. It's proven to be undecidable.\"\n  },\n  {\n    \"front\": \"Chapter 5: Computability - Give an example of an undecidable problem.\",\n    \"back\": \"The Halting Problem.\"\n  },\n  {\n    \"front\": \"Chapter 6: Complexity Theory - What is 'P' in complexity theory?\",\n    \"back\": \"The class of decision problems solvable in polynomial time by a deterministic Turing machine.\"\n  },\n  {\n    \"front\": \"Chapter 6: Complexity Theory - What is 'NP' in complexity theory?\",\n    \"back\": \"The class of decision problems for which a solution can be verified in polynomial time by a deterministic Turing machine.\"\n  },\n  {\n    \"front\": \"Chapter 6: Complexity Theory - What is the P vs NP problem?\",\n    \"back\": \"The central unsolved question in theoretical computer science asking whether every problem whose solution can be quickly verified can also be solved quickly.\"\n  },\n  {\n    \"front\": \"Chapter 6: Complexity Theory - Define NP-complete.\",\n    \"back\": \"A problem in NP that is at least as hard as any other problem in NP. If a polynomial-time algorithm were found for any NP-complete problem, then P=NP.\"\n  },\n  {\n    \"front\": \"Chapter 7: Additional Topics - What are some potential additional topics?\",\n    \"back\": \"Examples could include: Complexity classes beyond P and NP, Cryptography, Quantum Computation, or specific applications of Automata theory.\"\n  }\n]\n```"
+          },
+        ],
+        
+      },
+    ],
+  });
+  

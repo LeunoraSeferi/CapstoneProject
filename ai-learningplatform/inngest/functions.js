@@ -1,8 +1,8 @@
 import { inngest } from "./client";
 import { db } from "@/configs/db";
-import { STUDY_MATERIAL_TABLE,USER_TABLE,CHAPTER_NOTES_TABLE } from "@/configs/schema";
+import { STUDY_MATERIAL_TABLE,USER_TABLE,CHAPTER_NOTES_TABLE, STUDY_TYPE_CONTENT_TABLE } from "@/configs/schema";
 import { eq } from "drizzle-orm";
-import { courseOutlineAIModel, generateNotesAiModel } from "@/configs/AiModel";
+import { courseOutlineAIModel, generateNotesAiModel, GenerateStudyTypeContentAiModel } from "@/configs/AiModel";
 
         export const helloWorld = inngest.createFunction(
         { id: "hello-world" },
@@ -18,7 +18,7 @@ import { courseOutlineAIModel, generateNotesAiModel } from "@/configs/AiModel";
             async ({ event, step }) => {
                 const {user} = event.data; 
                 const result = await step.run('Check User and create New if not in DB',async()=>{
-                                    // Check Is User Already Exist
+                      // Check Is User Already Exist
                 const result = await db
                 .select()
                 .from(USER_TABLE)
@@ -85,7 +85,34 @@ import { courseOutlineAIModel, generateNotesAiModel } from "@/configs/AiModel";
             }
         )
 
-    
 
-   
+        //used to generate flashcard,quiz,question/answer
+      export const GenerateStudyTypeContent=inngest.createFunction(
+        {id:'Generate Study Type Content'},
+        {event:'studyType.content'},
+
+        async({event,step})=>
+        {
+          const {studyType,prompt,courseId,recordId}=event.data;
+
+          const FlashcardAiResult=await step.run('Generating Flashcards using Ai',async()=>{
+            const result = await GenerateStudyTypeContentAiModel.sendMessage(prompt);
+          
+            const AIResult=JSON.parse(result.response.text());
+            return AIResult
+        })
+        //save the result
+        const DbResult=await step.run('Save result to DB',async()=>{
+          const result=await db.update(STUDY_TYPE_CONTENT_TABLE)
+          .set({
+            content:FlashcardAiResult,
+            status:'Ready'
+          })
+          .where(eq(STUDY_TYPE_CONTENT_TABLE.id,recordId))
+          return 'Data Inserted';
+        });
+      }
+    )
+
+    
  

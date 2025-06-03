@@ -5,7 +5,7 @@ import { useState } from 'react';
 import MaterialCardItem from './MaterialCardItem';
 
 
-function StudyMaterialSection({courseId}) {
+function StudyMaterialSection({courseId,course}) {
 
 
     const[studyTypeContent,setStudyTypeContent]=useState();
@@ -61,11 +61,13 @@ function StudyMaterialSection({courseId}) {
 
         <div className='grid grid-cols-2 md:grid-cols-4 gap-5 mt-3'>
             {MaterialList.map((item,index)=>(
-              <Link key={index} href={'/course/'+courseId+item.path}>
+             // <Link key={index} href={'/course/'+courseId+item.path}>
                 <MaterialCardItem item={item} key={index}
                   studyTypeContent={studyTypeContent}
+                  course={course}
+                  refreshData={GetStudyMaterial}
                 />
-                </Link>
+               // </Link>
             ))}
         </div>
     </div>
