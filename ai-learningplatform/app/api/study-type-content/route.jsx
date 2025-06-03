@@ -10,7 +10,9 @@ export async function POST(req){
     const{chapters,courseId,type}=await req.json();
 
 
-    const PROMPT='Generate the flashcard on topic: '+chapters+' in JSON format with front back content,Maximum 25';
+    const PROMPT= type='Flashcard'?
+    'Generate the flashcard on topic: '+chapters+' in JSON format with front back content,Maximum 25'
+    :'Generate Quiz on topic:'+chapters+' with Question and Options along with correct answer in JSON format '
 
         //Insert record to DB,update status to Generating...
         const result=await db.insert(STUDY_TYPE_CONTENT_TABLE).values({
@@ -20,7 +22,7 @@ export async function POST(req){
     
 
             //trigger inngest function
-        inngest.send({
+        const _result=await inngest.send({
         name:'studyType.content',
         data:{
             studyType:type,

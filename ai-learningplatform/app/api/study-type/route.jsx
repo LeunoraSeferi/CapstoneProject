@@ -7,9 +7,6 @@ import { STUDY_TYPE_CONTENT_TABLE } from '@/configs/schema';
 
 
 
-
-
-
 export async function POST(req){
     const {courseId,studyType}=await req.json();
 
@@ -27,8 +24,8 @@ export async function POST(req){
         const result={
             notes:notes,
             flashcard:contentList?.filter(item=>item.type=='Flashcard'),
-            quiz:[],
-            qa:[]
+            quiz:contentList?.filter(item=>item.type=='Quiz'),
+            qa:contentList?.filter(item=>item.type=='QA')
         }
         return NextResponse.json(result);
     }
