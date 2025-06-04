@@ -40,6 +40,6 @@ export async function POST(req){
         const result=await db.select().from(STUDY_TYPE_CONTENT_TABLE)
         .where(and( eq(STUDY_TYPE_CONTENT_TABLE?.courseId,courseId),
         eq(STUDY_TYPE_CONTENT_TABLE.type,studyType)))
-        return NextResponse.json(result[0]);
+        return NextResponse.json(result[0]??[]);
     }
 }

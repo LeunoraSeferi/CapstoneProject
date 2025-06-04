@@ -67,7 +67,7 @@ function StudyMaterialSection({courseId,course}) {
                   course={course}
                   refreshData={GetStudyMaterial}
                 />
-               // </Link>
+              
             ))}
         </div>
     </div>

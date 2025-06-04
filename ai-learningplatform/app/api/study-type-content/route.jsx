@@ -10,7 +10,7 @@ export async function POST(req){
     const{chapters,courseId,type}=await req.json();
 
 
-    const PROMPT= type='Flashcard'?
+    const PROMPT=(type=='Flashcard')?
     'Generate the flashcard on topic: '+chapters+' in JSON format with front back content,Maximum 25'
     :'Generate Quiz on topic:'+chapters+' with Question and Options along with correct answer in JSON format '
 
@@ -22,7 +22,7 @@ export async function POST(req){
     
 
             //trigger inngest function
-        const _result=await inngest.send({
+        const result_=await inngest.send({
         name:'studyType.content',
         data:{
             studyType:type,

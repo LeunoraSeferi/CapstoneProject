@@ -43,7 +43,7 @@ function Flashcards() {
                 studyType:'Flashcard'
             });
         setFlashCards(result?.data);
-        console.log('Flashcard',result.data);
+        //console.log('Flashcard',result.data);
     }
 
     const handleClick=()=>{
