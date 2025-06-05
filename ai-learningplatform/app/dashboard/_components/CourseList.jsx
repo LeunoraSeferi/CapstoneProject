@@ -6,11 +6,14 @@ import React, { useEffect } from 'react'
 import { useState } from 'react';
 import CourseCardItem from './CourseCardItem' 
 import { Button } from '@/components/ui/button'
+import { useContext } from 'react';
+import { CourseCountContext } from '@/app/_context/CourseCountContext';
 
 function CourseList() {
 const { user } = useUser();
 const [courseList,setCourseList]=useState([]);
 const [loading,setLoading]=useState(false);
+const {totalCourse,setTotalCourse}=useContext(CourseCountContext);
 
   useEffect(()=>{
     user&&GetCourseList();
@@ -23,6 +26,7 @@ const [loading,setLoading]=useState(false);
     console.log(result);
     setCourseList(result.data.result);
     setLoading(false);
+    setTotalCourse(result.data.result?.length);
   }
 
   return (
