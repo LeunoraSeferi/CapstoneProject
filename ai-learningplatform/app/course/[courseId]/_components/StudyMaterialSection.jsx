@@ -30,13 +30,13 @@ function StudyMaterialSection({courseId,course}) {
             path: '/quiz',
             type:'quiz'
           },
-          {
-            name: 'Question/Answer',
-            desc: 'A useful way to apply your knowledge',
-            icon: '/qa.png',
-            path: '/qa',
-            type:'qa'
-          }
+         // {
+         //   name: 'Question/Answer',
+           // desc: 'A useful way to apply your knowledge',
+          //  icon: '/qa.png',
+           // path: '/qa',
+          //  type:'qa'
+        //  }
         ]
 
     useEffect(()=>{
@@ -59,7 +59,8 @@ function StudyMaterialSection({courseId,course}) {
     <div className='mt-5'>
         <h2 className='font-medium text-xl '>Study Material</h2>
 
-        <div className='grid grid-cols-2 md:grid-cols-4 gap-5 mt-3'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-center items-stretch max-w-5xl mx-auto'>
+
             {MaterialList.map((item,index)=>(
              
                 <MaterialCardItem item={item} key={index}

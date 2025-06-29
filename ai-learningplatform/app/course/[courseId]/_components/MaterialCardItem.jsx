@@ -1,9 +1,10 @@
-import { Button } from '@/components/ui/button'
-import axios from 'axios'
+// components/MaterialCardItem.jsx
+import { Button } from '@/components/ui/button';
+import axios from 'axios';
 import { RefreshCcw } from 'lucide-react';
-import Image from 'next/image'
+import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { toast } from 'sonner';
 
 function MaterialCardItem({ item, studyTypeContent, course, refreshData }) {
@@ -20,7 +21,7 @@ function MaterialCardItem({ item, studyTypeContent, course, refreshData }) {
       chapters = (chapter.courseTitle || chapter?.title) + "," + chapters;
     });
 
-    const result = await axios.post("/api/study-type-content", {
+    await axios.post("/api/study-type-content", {
       courseId: course?.courseId,
       type: item.name,
       chapters: chapters,
@@ -32,11 +33,9 @@ function MaterialCardItem({ item, studyTypeContent, course, refreshData }) {
   };
 
   return (
-    <div
-      className={`border shadow-md rounded-lg p-5 flex flex-col items-center ${
-        !isReady && "grayscale"
-      }`}
-    >
+    <div className={`border shadow-md rounded-lg p-5 flex flex-col items-center w-[220px] transition hover:shadow-lg hover:scale-[1.02] ${
+      !isReady && "grayscale"
+    }`}>
       {!isReady ? (
         <h2 className="p-1 px-2 bg-gray-500 text-white rounded-full text-[10px] mb-2">
           Generate
@@ -73,6 +72,5 @@ function MaterialCardItem({ item, studyTypeContent, course, refreshData }) {
     </div>
   );
 }
-
 
 export default MaterialCardItem;
